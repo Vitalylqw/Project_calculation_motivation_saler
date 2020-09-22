@@ -7,6 +7,7 @@ import re
 
 
 class Customers_bils_file():
+    """Работа с файлом оперативный учет"""
     def __init__(self, file_name):
         self.file = pd.ExcelFile(file_name)
 
@@ -55,15 +56,16 @@ class documents_control_file():
             return True
 
 class write_to_exel():
+    """Запись данных в рабочий файл менеджера"""
     def __init__(self,name,manager):
         self.name=name
         self.file = xl.load_workbook(name)
         self.ws = self.file[manager]
-
+    # Вносим запись
     def  rec(self,row,rate,date):
         self.ws['M'+str(row)]=rate
         self.ws['O' + str(row)] = date
-        # self.file.save(self.name)
+    # Записываем и закрываем файл
     def clos(self):
         self.file.save(self.name)
         self.file.close()
